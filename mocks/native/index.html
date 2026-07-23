@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+:root {
+  --void: #0a0a0a;
+  --mint: #00ffaa;
+  --gray: #222;
+  --text: #888;
+}
+body {
+  background: var(--void);
+  color: white;
+  font-family: 'Courier New', monospace;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+.hero {
+  text-align: center;
+  max-width: 800px;
+  padding: 2rem;
+}
+.headline {
+  font-size: 1.5rem;
+  color: var(--mint);
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.mock-container {
+  position: relative;
+  width: 600px;
+  height: 400px;
+  background: var(--gray);
+  border: 2px solid var(--mint);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 255, 170, 0.2);
+}
+.feed {
+  padding: 20px;
+  transition: filter 0.5s ease;
+}
+.tweet {
+  background: #151515;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  border-left: 3px solid var(--mint);
+  transition: all 0.5s ease;
+}
+.tweet-user { color: var(--mint); font-weight: bold; font-size: 0.8rem; }
+.tweet-text { color: #ccc; font-size: 0.9rem; margin-top: 5px; }
+.ghost-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--mint);
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: inherit;
+  box-shadow: 0 0 15px var(--mint);
+  z-index: 10;
+  transition: transform 0.2s;
+}
+.ghost-btn:active { transform: scale(0.9); }
+.ghost-active .feed {
+  filter: blur(8px) grayscale(1);
+  opacity: 0.3;
+}
+.ghost-active .tweet.focused {
+  filter: none;
+  opacity: 1;
+  transform: scale(1.1);
+  box-shadow: 0 0 30px var(--mint);
+  position: relative;
+  z-index: 5;
+  background: #1a1a1a;
+}
+.label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 0.7rem;
+  color: var(--mint);
+  opacity: 0.6;
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="headline">Twitter Ghost: Turn the noise into a focused sanctuary with one click.</div>
+  
+  <div class="mock-container" id="app">
+    <div class="label">MOCK_BROWSER_VIEW</div>
+    <div class="feed">
+      <div class="tweet">
+        <div class="tweet-user">@noise_bot</div>
+        <div class="tweet-text">Just some random shouting into the void! #chaos #spam</div>
+      </div>
+      <div class="tweet focused" id="target">
+        <div class="tweet-user">@deep_thought</div>
+        <div class="tweet-text">The signal is hidden within the noise. Find the silence.</div>
+      </div>
+      <div class="tweet">
+        <div class="tweet-user">@distraction_hq</div>
+        <div class="tweet-text">Check out this 10-part thread on why you are wasting time!</div>
+      </div>
+    </div>
+    <button class="ghost-btn" onclick="toggleGhost()">GHOST</button>
+  </div>
+</div>
+
+<script>
+  function toggleGhost() {
+    document.getElementById('app').classList.toggle('ghost-active');
+    const btn = document.querySelector('.ghost-btn');
+    btn.innerText = document.getElementById('app').classList.contains('ghost-active') ? 'RESTORE' : 'GHOST';
+  }
+</script>
+
+</body>
+</html>
